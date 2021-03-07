@@ -7,37 +7,51 @@ Copyright © 2021 by Santosh Singh All rights reserved. No part of this publicat
 
 
 
-## Contents
+# Contents
 
-- 1 Introduction 
-      - What Testing?
-      - Test Tools
-      - What is the JEST framework?
-      - What are the main features of the JEST framework?
-- 2 How to Setup Jest
-- 3 Testing Type
-      - TDD (Test Driven Development)
-      - BDD (Behavior Driven Development)
-- 4 How to organize your test code
-- 5 Mocking
-      - Benefits of Mocking
-- 6 Mock supports in Jest
-      - jest.fn()
-      - Function mock using jest.spyOn()
-      - Module mocks using jest.mock()
-      - Mock some function of the module
- - 7 Jest Tips and Trics
- 
--7 Cookbook
+- [Contents](#contents)
+- [Introduction](#introduction)
+  - [What Testing?](#what-testing)
+- [Test Tools](#test-tools)
+- [Jest Basics](#jest-basics)
+  - [What is the JEST framework?](#what-is-the-jest-framework)
+  - [Jest Characteristics](#jest-characteristics)
+- [What are the main features of the JEST framework?](#what-are-the-main-features-of-the-jest-framework)
+  - [Matchers](#matchers)
+    - [Install Jest using yarn:](#install-jest-using-yarn)
+    - [Or npm:](#or-npm)
+  - [Running from the command line](#running-from-the-command-line)
+- [Type of Test](#type-of-test)
+    - [TDD (Test Driven Development)](#tdd-test-driven-development)
+    - [BDD (Behavior Driven Development)](#bdd-behavior-driven-development)
+  - [How to organize your test code](#how-to-organize-your-test-code)
+- [Mocking](#mocking)
+    - [Benefits of Mocking](#benefits-of-mocking)
+      - [ISOLATION](#isolation)
+      - [TEST DURATION](#test-duration)
+    - [Jest mocks API](#jest-mocks-api)
+      - [Function mock using jest.spyOn()](#function-mock-using-jestspyon)
+      - [jest.fn()](#jestfn)
+      - [Mock Return Values](#mock-return-values)
+      - [Function mock using jest.spyOn()](#function-mock-using-jestspyon-1)
+    - [Module mocks using jest.mock()](#module-mocks-using-jestmock)
+    - [Mock some function of the module](#mock-some-function-of-the-module)
+- [Jest Tips and Trics](#jest-tips-and-trics)
+    - [using Object.definePoperty](#using-objectdefinepoperty)
+    - [using jest.spyOn](#using-jestspyon)
+- [Cookbook](#cookbook)
+    - [How to mock JQuery event jest](#how-to-mock-jquery-event-jest)
+  - [Example 2- How to mock window property using JEST](#example-2--how-to-mock-window-property-using-jest)
+  - [How to mock DOM selector using JEST](#how-to-mock-dom-selector-using-jest)
 
 
 <div style="page-break-after: always;"></div>
 
 
-## Introduction
+# Introduction
 
 
-# What Testing?
+## What Testing?
 
 ![](https://editor-cdn.reedsy.com/books/604359277ad874723891c7e1/images/e8be2532-0ada-4720-a5b1-64844daba2ef.jpg)
 
@@ -45,7 +59,6 @@ Fig 1
 
 It’s **important** to ensure that the application should not result in any failures because it can be very expensive in the future or in the later stages of development. Proper **testing** ensures that bugs and issues are detected early in the life cycle of the product or application.
 
-Test Tools
 
 # Test Tools
 
@@ -83,8 +96,6 @@ Below are some features of the **JEST** framework
 -   **Jest** runs tests in parallel which makes running the whole test suite so much faster.
 -   The coverage feature is impressive too
 
-## Jest Basics
-
 Let’s take a look at some basics of writing tests with Jest.
 
 **Describe Blocks**
@@ -101,7 +112,7 @@ describe('Beverage()', () => {
   });
 });
 
-### Matchers
+## Matchers
 
 Next, let’s look at the matchers Jest exposes. A matcher is used for creating assertions in combination with the _expect_ keyword. We want to compare the output of our test with a value we expect the function to return.
 
@@ -116,7 +127,7 @@ The complete list of exposed matchers can be found in the [Jest API reference](h
 <div style="page-break-after: always;"></div>
 
 
-## 2 How to Setup Jest
+#How to Setup Jest
 
 In this chapter, I will explain to you how to set up the jest framework in
 your application.Jest is a zero configuration testing framework but It also providesconfiguration to control the testing process.
@@ -159,7 +170,7 @@ PASS ./sum.test.js✓
 adds 1 + 2 to equal 3 (5ms)
 ```
 
-### Running from the command line
+## Running from the command line
 
 You can run Jest directly from the CLI (if it’s globally available in your PATH, e.g. by yarn global add jest or npm install jest —global) with a variety of useful options. Here’s how to run Jest on files matching my-test, using config.json as a configuration file and display a native OS notification after the run:
 
@@ -170,12 +181,12 @@ jest my-test --notify --config=config.json
 <div style="page-break-after: always;"></div>
 
 
-## Type of Test
+# Type of Test
 
  In this chapter, we will discuss the different type of testing methodolo-
 gies.
 
-#### TDD (Test Driven Development)
+### TDD (Test Driven Development)
 TDD (Test Driven Development) is one of the software development methods.The concept is that you write a test before you implement a function.
 
 ![](https://editor-cdn.reedsy.com/books/604359277ad874723891c7e1/images/27b9c0ab-1768-41cf-8d94-400fe5d3bdf6.png)
@@ -191,7 +202,7 @@ all the other tests.
 the quality of the product. Also, make sure it passes the new test and
 passed tests.
 
-#### BDD (Behavior Driven Development)
+### BDD (Behavior Driven Development)
 
 BDD is another software development method. That designs tests and
 expresses behaviour (required specification). In BDD, the test is thought ofas the first customer of the products and requires some specifications in the words of a human. That is why testing frameworks provide us with functions that allow us to write as you write a sentence. Suppose that there is a module called Calculator and it has add function as a
@@ -230,7 +241,7 @@ it, it’s not as easy to keep tests organized and discoverable
 
 <div style="page-break-after: always;"></div>
 
-## Mocking
+# Mocking
 
 In this chapter, we will learn what is mocking and why we should use it
 in our project.
@@ -241,7 +252,7 @@ testedhasexternaldependencies. Thepurposeofmockingistoisolate
 andfocusonthecodebeingtestedandnotonthebehaviororstateof
 externaldependencies.
 
-#### Benefits of Mocking
+### Benefits of Mocking
 
 ![](https://editor-cdn.reedsy.com/books/604359277ad874723891c7e1/images/f8d083ff-e4ec-42ea-962b-bac1d3aabec9.png)
 
@@ -253,7 +264,7 @@ the scope of unit tests small can help you write short and focused tests. When m
 Mocking database interactions, file system access, and external services are a great way to speed up your tests. It is absolutely imperative that unit tests run
 quickly.
 
-## 6 Mock supports in Jest
+##Mock supports in Jest
 
  In this chapter, we will understand how jest mocks the functions and module.
 ==Out of the box jest support mocks==. There are two way to mock the functions in jest
@@ -287,7 +298,7 @@ plenty of helpfulmethodsonreturnedJestmockto control its input, output and imple
 For example, instead of calling ```toHaveBeenCalledTimes```, you can use the following code snippet also
 ![](https://editor-cdn.reedsy.com/books/604359277ad874723891c7e1/images/decb6cb5-311c-480e-a097-893fa522f013.png)
 
-### Mock Return Values
+#### Mock Return Values
 
 
 Every mock function can also be used to inject test values into your code during a test
@@ -327,7 +338,7 @@ that it will return the mock function result.
 4. Once you are done with the mock version of the method you can restore
 the original function by calling _mockRestore_ on the mock object.
 
-# Module mocks using jest.mock()
+### Module mocks using jest.mock()
 
 Just provides the fantastic feature for mocking the whole module by using [automock](https://jestjs.io/docs/en/configuration#automock-boolean) that you can enable globally or inside individual test files using **jest.mock()** method.
 
@@ -347,7 +358,7 @@ jest.mock(..)
 
 It works, but what if a module exports tens or hundreds of methods? Manually reassigning all of them would be cumbersome. Jest comes with a fantastic feature called [automock](https://jestjs.io/docs/en/configuration#automock-boolean) that you can enable globally or inside individual test files using jest.mock() method.
 
-# Mock some function of the module
+### Mock some function of the module
 
 Let’s suppose you have the following javascript module in your code and you want only to mock **random** function.
 
@@ -360,6 +371,79 @@ module.js
 module.test.js
 
 <div style="page-break-after: always;"></div>
+
+# Jest Tips and Trics
+
+In this chapter I will discuss some tips and trics about the JEST framework.
+Jest Internally used  **JSDOM** . ** JSDOM** is a library which parses and interacts with assembled HTML just like a browser. The benefit to **JSDOM** is that it isn't actually a browser. Instead, it implements web standards like browsers do. You can feed it some HTML, and it will parse that HTML.
+
+So if you want to mock any window/document variables then those variables are provided by `jsdom` by default which let's us to mock them using built-in `jest` methods  `jest.spyOn().mockImplementation()` and restore with `.mockRestore()`.
+
+For example,Let's suppose you have following javascript function in your code
+
+```javascript
+const TestModule = (function () {
+  const notification = () => {
+    window.alert("DO SOME WORK")
+  };
+  return {
+    notification: notification,
+  };
+})();
+module.exports = TestModule;
+```
+In the above code snippet I am using `window.alert`. Now if you want to write the unit test for the above function you have to mock the `window.alert` function. 
+
+You can mock any global object in two way
+
+### using Object.definePoperty
+```javascript
+Object.defineProperty(global, "window", {
+      value: {
+        alert: jest.fn()
+      }
+    });
+```
+### using jest.spyOn
+
+```javascript
+jest.spyOn(window, 'alert').mockImplementation(() => {});
+```
+
+```javascript
+const TestModule = require("../module");
+
+describe("Mock window property", () => {
+  it("should mock window alert function", () => {
+    Object.defineProperty(global, "window", {
+      value: {
+        alert: jest.fn(),
+      },
+    });
+    TestModule.notification();
+    expect(window.alert).toBeCalled();
+  });
+});
+```
+>Output
+```
+  Mock window property
+    √ should mock window alert function (3 ms)
+
+-----------|---------|----------|---------|---------|-------------------
+File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-----------|---------|----------|---------|---------|-------------------
+All files  |     100 |      100 |     100 |     100 | 
+ module.js |     100 |      100 |     100 |     100 | 
+-----------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        4.225 s
+Ran all test suites.
+
+
+```
 
 # Cookbook
 
@@ -437,7 +521,7 @@ describe("Mock window property", () => {
   });
 });
 ```
-### How to mock DOM selector using JEST
+## How to mock DOM selector using JEST
 
 
 
