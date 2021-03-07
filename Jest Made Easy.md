@@ -523,5 +523,31 @@ describe("Mock window property", () => {
 ```
 ## How to mock DOM selector using JEST
 
+```javascript
+module.exports = function main() {
+  document.addEventListener('DOMContentLoaded', () => {
+     console.log("TODO...");
+  });
+}
+```
 
+>Solution
+
+```javascript
+const main = require("../module");
+describe("DOMContentLoaded", () => {
+  it("should pass", () => {
+    document.addEventListener = jest
+      .fn()
+      .mockImplementationOnce((event, callback) => {
+        callback();
+      });
+    main();
+    expect(document.addEventListener).toBeCalledWith(
+      "DOMContentLoaded",
+      expect.any(Function)
+    );
+  });
+});
+```
 
